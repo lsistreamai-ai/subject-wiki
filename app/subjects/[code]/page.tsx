@@ -1,10 +1,5 @@
 import Link from 'next/link'
-
-const subjects = [
-  { name: 'Chinese Language', code: 'CHIN' },
-  { name: 'English Language', code: 'ENG' },
-  { name: 'Mathematics', code: 'MATH' },
-]
+import { subjects as allSubjects, colors } from '../../data'
 
 // Mock topic data (will connect to Supabase later)
 const topicsData: Record<string, { title: string; title_zh: string; level: string[]; count: number }[]> = {
@@ -31,23 +26,11 @@ const topicsData: Record<string, { title: string; title_zh: string; level: strin
   ],
 }
 
-const colors: Record<string, string> = {
-  CHIN: 'bg-red-500',
-  ENG: 'bg-blue-500',
-  MATH: 'bg-green-500',
-  LS: 'bg-purple-500',
-  PHY: 'bg-yellow-500',
-  CHEM: 'bg-orange-500',
-  BIO: 'bg-teal-500',
-  ECON: 'bg-indigo-500',
-  HIST: 'bg-pink-500',
-  GEOG: 'bg-cyan-500',
-}
-
-export default function SubjectPage({ params }: { params: { code: string } }) {
-  const subject = subjects.find(s => s.code === params.code)
-  const topics = topicsData[params.code] || []
-  const subjectColor = colors[params.code] || 'bg-gray-500'
+export default async function SubjectPage({ params }: { params: { code: string } }) {
+  const { code } = await Promise.resolve(params)
+  const subject = allSubjects.find(s => s.code === code)
+  const topics = topicsData[code] || []
+  const subjectColor = colors[code] || 'bg-gray-500'
 
   if (!subject) {
     return (
@@ -98,7 +81,7 @@ export default function SubjectPage({ params }: { params: { code: string } }) {
           {topics.map((topic, i) => (
             <Link
               key={i}
-              href={`/subjects/${params.code}/${topic.title.toLowerCase().replace(/\s+/g, '-')}`}
+              href={`/subjects/${code}/${topic.title.toLowerCase().replace(/\s+/g, '-')}`}
               className="group p-6 bg-white rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all"
             >
               <div className="flex items-start justify-between">
