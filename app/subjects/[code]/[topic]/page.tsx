@@ -49,10 +49,29 @@ const topicContent: Record<string, {
       { title: 'Grammar', subject: 'ENG' },
     ],
   },
+  'numbers&operations': {
+    title: 'Numbers & Operations',
+    title_zh: '數字與運算',
+    level: ['P1', 'P2'],
+    content: 'Numbers and operations form the foundation of mathematics, including counting, addition, subtraction, multiplication, and division.',
+    objectives: [
+      'Count and recognize numbers',
+      'Perform basic operations',
+      'Solve simple word problems',
+      'Understand place value',
+    ],
+    examples: [
+      { title: 'Counting', content: 'Count objects from 1 to 100.' },
+    ],
+    relatedTopics: [
+      { title: 'Fractions', subject: 'MATH' },
+    ],
+  },
 }
 
-export default function TopicPage({ params }: { params: { code: string; topic: string } }) {
-  const topicKey = params.topic.replace(/-/g, '').toLowerCase()
+export default async function TopicPage({ params }: { params: { code: string; topic: string } }) {
+  const { code, topic: topicSlug } = await Promise.resolve(params)
+  const topicKey = topicSlug.replace(/-/g, '').replace(/&/g, '&').toLowerCase()
   const topic = topicContent[topicKey] || topicContent['fractions']
   
   return (
@@ -63,7 +82,7 @@ export default function TopicPage({ params }: { params: { code: string; topic: s
         <nav className="text-sm text-gray-400 mb-8">
           <Link href="/" className="hover:text-gray-600">Subjects</Link>
           <span className="mx-2">/</span>
-          <Link href={`/subjects/${params.code}`} className="hover:text-gray-600">{params.code}</Link>
+          <Link href={`/subjects/${code}`} className="hover:text-gray-600">{code}</Link>
           <span className="mx-2">/</span>
           <span className="text-gray-900 font-medium">{topic.title}</span>
         </nav>
