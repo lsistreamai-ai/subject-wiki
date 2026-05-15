@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-// Mock content data
 const topicContent: Record<string, { 
   title: string
   title_zh: string
@@ -53,9 +52,9 @@ const topicContent: Record<string, {
 }
 
 export default function TopicPage({ params }: { params: { code: string; topic: string } }) {
-  const topicKey = params.topic.replace(/-/g, '')
-  const topic = topicContent[topicKey] || topicContent['fractions'] // Default fallback
-
+  const topicKey = params.topic.replace(/-/g, '').toLowerCase()
+  const topic = topicContent[topicKey] || topicContent['fractions']
+  
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-4xl mx-auto px-6 py-12">
