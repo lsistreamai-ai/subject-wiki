@@ -15,53 +15,39 @@ const subjects = [
 
 export default function Home() {
   return (
-    <main className="max-w-6xl mx-auto p-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">📚 Subject Wiki</h1>
-        <p className="text-xl text-gray-600 mb-2">Collaborative Knowledge Base for Hong Kong Schools</p>
-        <p className="text-gray-500">Teachers contribute → Knowledge grows → Students learn</p>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-        <h2 className="text-2xl font-bold mb-4">🎯 Features</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-bold text-lg mb-2">👥 Teacher Driven</h3>
-            <p className="text-gray-600">Teachers contribute and verify content</p>
-          </div>
-          <div className="p-4 bg-green-50 rounded-lg">
-            <h3 className="font-bold text-lg mb-2">🌱 Self-Growing</h3>
-            <p className="text-gray-600">AI-enhanced suggestions and expansion</p>
-          </div>
-          <div className="p-4 bg-purple-50 rounded-lg">
-            <h3 className="font-bold text-lg mb-2">📖 All Subjects</h3>
-            <p className="text-gray-600">Primary, Secondary, DSE coverage</p>
-          </div>
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-5xl mx-auto px-6 py-16">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="text-6xl mb-6">📚</div>
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            Subject Wiki
+          </h1>
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+            Collaborative knowledge base for Hong Kong schools
+          </p>
         </div>
-      </div>
 
-      <h2 className="text-2xl font-bold mb-4">DSE Subjects</h2>
-      <div className="grid md:grid-cols-5 gap-4">
-        {subjects.map(subject => (
-          <Link 
-            key={subject.code}
-            href={`/subjects/${subject.code}`}
-            className="p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow"
-          >
-            <div className={`w-full h-2 rounded ${subject.color} mb-2`}></div>
-            <h3 className="font-bold">{subject.name}</h3>
-            <p className="text-sm text-gray-500">{subject.code}</p>
-          </Link>
-        ))}
-      </div>
+        {/* Subject Grid */}
+        <div className="grid md:grid-cols-5 gap-3">
+          {subjects.map(subject => (
+            <Link 
+              key={subject.code}
+              href={`/subjects/${subject.code}`}
+              className="group p-5 bg-white rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all"
+            >
+              <div className={`w-full h-1.5 rounded-full ${subject.color} mb-3 group-hover:h-2 transition-all`}></div>
+              <h3 className="font-semibold text-gray-900">{subject.name}</h3>
+              <p className="text-sm text-gray-400 mt-1">{subject.code}</p>
+            </Link>
+          ))}
+        </div>
 
-      <div className="mt-12 text-center">
-        <Link 
-          href="/login" 
-          className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700"
-        >
-          🎓 Teacher Login
-        </Link>
+        {/* Footer */}
+        <div className="mt-16 text-center text-sm text-gray-400">
+          <p>EDB & HKAA Curriculum Aligned</p>
+        </div>
       </div>
     </main>
   )

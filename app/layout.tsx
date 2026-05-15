@@ -13,16 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-gray-50">
-        <nav className="bg-blue-600 text-white p-4 shadow-lg">
-          <div className="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="/" className="font-bold text-xl">📚 Subject Wiki</a>
-            <div className="flex gap-4">
-              <a href="/subjects" className="hover:underline">Subjects</a>
-              <a href="/login" className="hover:underline">Teacher Login</a>
-            </div>
-          </div>
-        </nav>
+      <body className="antialiased">
         {children}
       </body>
     </html>
